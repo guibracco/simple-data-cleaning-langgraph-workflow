@@ -16,6 +16,7 @@ The workflow follows these steps:
 5. **Data Cleaning** - Can execute:
    - **Handle Missing Values** - Fills numeric missing values with column means
    - **Remove Outliers** - Removes outliers using IQR (Interquartile Range) method
+   - **Both** - Fills missing numeric values, then removes outliers using IQR
 6. **Describe Data** - Generates statistical summary of cleaned data
 7. **Output Results** - Prints the action taken and final summary
 
@@ -73,7 +74,7 @@ poetry run python workflows/simple_clean_data_workflow.py
 
 The workflow will:
 1. Save a workflow graph visualization to `outputs/workflow_graph.png`
-2. Load data from `data/missing.csv` (you can change this in the script)
+2. Load data from `data/missing_and_outliers.csv` (you can change this in the script)
 3. Use an LLM to analyze the data and decide which cleaning action to take
 4. Execute the appropriate cleaning steps
 5. Display the results
