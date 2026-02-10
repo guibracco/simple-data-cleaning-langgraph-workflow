@@ -25,7 +25,7 @@ poetry.lock
 *~
 
 # Generated workflow graphs
-outputs/*
+# outputs/*
 !outputs/.gitkeep
 
 # OS
