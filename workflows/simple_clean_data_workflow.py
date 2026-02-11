@@ -68,12 +68,17 @@ def reasoning_node(state: DataState) -> DataState:
     prompt = (
         "You are a data science assistant. "
         "Given this dataset summary, decide which single action is most appropriate: "
-        "'clean_missing', 'remove_outliers', or 'both'.\n\n"
+        "'clean_missing', 'remove_outliers', 'both', or 'none'.\n\n"
+        "Rules:\n"
+        "If there are missing values but no outliers, choose 'clean_missing'.\n"
+        "If there are no missing values but there are outliers, choose 'remove_outliers'.\n"
+        "ONLY if there are both missing values AND outliers, choose 'both'.\n\n"
         f"{state['summary']}\n\n"
-        "Respond only with one of: clean_missing, remove_outliers, both."
+        "If there are no missing values and no outliers, respond with 'none'.\n"
+        "Respond only with one of: clean_missing, remove_outliers, both, none."
     )
     decision = llm.invoke(prompt).content.strip().lower()
-    if decision not in ["clean_missing", "remove_outliers", "both"]:
+    if decision not in ["clean_missing", "remove_outliers", "both", "none"]:
         decision = "none"
     state["action"] = decision
     return state
